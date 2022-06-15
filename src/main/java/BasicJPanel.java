@@ -103,6 +103,7 @@ public class BasicJPanel extends JPanel {
         button.setBounds(x, y, w, h);
         button.addActionListener(e -> {
             images.setFilter(type, this.originalImage);
+            repaint();
         });
         button.setBackground(color);
         button.setForeground(foregroundColor);
