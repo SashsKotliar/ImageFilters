@@ -4,16 +4,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.function.Supplier;
 
 public class BasicJPanel extends JPanel {
     private ImageIcon backGround;
-    private BufferedImage originalImage;
-    private BufferedImage imageForEditing;
     private JLabel title;
     private JLabel askToInput;
     private JTextField inputField;
+    private BufferedImage originalImage;
+    private MyFilters images;
 
 
     public BasicJPanel(int x, int y, int w, int h, Color color) {
@@ -30,10 +28,10 @@ public class BasicJPanel extends JPanel {
         try {
             File file = new File("C:\\Users\\Sasha\\Downloads\\DoraPhoto.jpg");
             this.originalImage = ImageIO.read(file);
-            this.imageForEditing = ImageIO.read(file);
         } catch (IOException e){
             System.out.println("Invalid data");
         }
+        this.images = new MyFilters(this.originalImage);
 
         init();
     }
@@ -64,9 +62,10 @@ public class BasicJPanel extends JPanel {
         if (this.backGround != null) {
             this.backGround.paintIcon(this, g, 0, 0);
         }
-        g.drawImage(this.originalImage, 30, 200, this); // see javadoc for more info on the parameters
-        g.drawImage(this.imageForEditing, Constants.WINDOW_W - 30 - this.imageForEditing.getWidth(), 200, this);
+        g.drawImage(this.originalImage, Constants.IMAGE_X, Constants.IMAGE_Y, this);
     }
+
+
 
     public JLabel addJLabel(String title, int x, int y, int w, int h, int size, Color color) {
         JLabel jLabel = new JLabel(title, SwingConstants.CENTER);
@@ -84,27 +83,29 @@ public class BasicJPanel extends JPanel {
             String input = textField.getText();
             textField.setText("");
             int currentY = Constants.FIRST_BUTTON_Y;
-            for (int i = 0; i < Constants.AMOUNT_OF_BUTTONS; i++){
-                addButton(Constants.filterOptions[i], Constants.TEXT_FIELD_X, currentY,
+            for (int i = 0; i < Constants.AMOUNT_OF_BUTTONS; i++) {
+                addButton(i, Constants.filterOptions[i], Constants.TEXT_FIELD_X, currentY,
                         Constants.TEXT_FIELD_W, Constants.TEXT_FIELD_H, Color.white, Color.black);
-                currentY+=Constants.TEXT_FIELD_H;
-            }
+                currentY += Constants.TEXT_FIELD_H;
+                }
 
         });
         this.add(textField);
         return textField;
     }
 
-    public JButton addButton(String text, int x, int y, int w, int h, Color foregroundColor,
+    public JButton addButton(int type, String text, int x, int y, int w, int h, Color foregroundColor,
                              Color color) {
         JButton button = new JButton(text);
         button.setBounds(x, y, w, h);
         button.addActionListener(e -> {
-
+            images.setFilter(type, this.originalImage);
         });
         button.setBackground(color);
         button.setForeground(foregroundColor);
         this.add(button);
         return button;
     }
+
+
 }

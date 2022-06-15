@@ -23,5 +23,8 @@ public class Constants {
     public static final int FIRST_BUTTON_Y = TEXT_FIELD_Y + TEXT_FIELD_H + 20;
 
     public static final int AMOUNT_OF_BUTTONS = 6;
+    public static final int IMAGE_Y = 170;
+    public static final int IMAGE_X = 30;
+
 
 }
