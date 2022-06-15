@@ -19,10 +19,14 @@ public class MyFilters {
     public static final int COLOR_SHIFT_RIGHT = 5;
 
 
-    public MyFilters(BufferedImage originalImage){
+    public MyFilters(){
 
-      this.imageForEditing = originalImage;
-
+        try {
+            File file = new File("C:\\Users\\Sasha\\Downloads\\DoraPhoto.jpg");
+            this.imageForEditing = ImageIO.read(file);
+        } catch (IOException e){
+            System.out.println("Invalid data");
+        }
     }
 
     public void setToNegative(BufferedImage originalImage){

@@ -31,7 +31,7 @@ public class BasicJPanel extends JPanel {
         } catch (IOException e){
             System.out.println("Invalid data");
         }
-        this.images = new MyFilters(this.originalImage);
+        this.images = new MyFilters();
 
         init();
     }
@@ -63,6 +63,9 @@ public class BasicJPanel extends JPanel {
             this.backGround.paintIcon(this, g, 0, 0);
         }
         g.drawImage(this.originalImage, Constants.IMAGE_X, Constants.IMAGE_Y, this);
+        g.drawImage(this.images.getImageForEditing(),
+                Constants.WINDOW_W - this.originalImage.getWidth() -Constants.IMAGE_X,
+                Constants.IMAGE_Y, this);
     }
 
 
