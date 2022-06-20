@@ -83,14 +83,19 @@ public class BasicJPanel extends JPanel {
         JTextField textField = new JTextField();
         textField.setBounds(x, y, w, h);
         textField.addActionListener(e -> {
-            String input = textField.getText();
+            String inputFromUser = textField.getText();
             textField.setText("");
+
+
             int currentY = Constants.FIRST_BUTTON_Y;
             for (int i = 0; i < Constants.AMOUNT_OF_BUTTONS; i++) {
                 addButton(i, Constants.filterOptions[i], Constants.TEXT_FIELD_X, currentY,
                         Constants.TEXT_FIELD_W, Constants.TEXT_FIELD_H, Color.white, Color.black);
                 currentY += Constants.TEXT_FIELD_H;
-                }
+            }
+            Facebook facebook = new Facebook(0, 0, Constants.WINDOW_W, Constants.WINDOW_H,
+                    Color.GRAY, inputFromUser);
+
 
         });
         this.add(textField);
@@ -108,8 +113,8 @@ public class BasicJPanel extends JPanel {
         button.setBackground(color);
         button.setForeground(foregroundColor);
         this.add(button);
+        repaint();
         return button;
     }
-
 
 }
