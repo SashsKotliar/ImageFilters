@@ -6,18 +6,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class BasicJPanel extends JPanel {
-    private ImageIcon backGround;
+    //private ImageIcon backGround;
     private JLabel title;
     private JLabel askToInput;
     private JTextField inputField;
-    private BufferedImage originalImage;
-    private MyFilters images;
-
+    private JLabel pic1 = new JLabel();
 
     public BasicJPanel(int x, int y, int w, int h, Color color) {
         this.setBounds(x, y, w, h);
         this.setBackground(color);
-        this.backGround = null;
+        //this.backGround = null;
         this.title = addJLabel("WELCOME TO IMAGE PROCESSING APP!", Constants.TITLE_X,
                 Constants.TITLE_Y, Constants.TITLE_W, Constants.TITLE_H, Constants.TITLE_SIZE, Color.BLACK);
         this.askToInput = addJLabel("Enter a facebook profile for image editing: ",
@@ -25,14 +23,6 @@ public class BasicJPanel extends JPanel {
                 Constants.TEXT_SIZE, Color.black);
         this.inputField = addTextField(Constants.TEXT_FIELD_X,Constants.TEXT_FIELD_Y,
                 Constants.TEXT_FIELD_W, Constants.TEXT_FIELD_H);
-        try {
-            File file = new File("C:\\Users\\Sasha\\Downloads\\DoraPhoto.jpg");
-            this.originalImage = ImageIO.read(file);
-        } catch (IOException e){
-            System.out.println("Invalid data");
-        }
-        this.images = new MyFilters();
-
         init();
     }
 
@@ -40,13 +30,13 @@ public class BasicJPanel extends JPanel {
         this.setBounds(x, y, w, h);
         this.title = addJLabel(title, 0, 0, this.getWidth(), 800, 400, Color.blue.brighter());
         this.title.setOpaque(true);
-        this.backGround = new ImageIcon(fieldName);
+       // this.backGround = new ImageIcon(fieldName);
         init();
     }
 
     public BasicJPanel(int x, int y, int w, int h, String fieldName) {
         this.setBounds(x, y, w, h);
-        this.backGround = new ImageIcon(fieldName);
+       // this.backGround = new ImageIcon(fieldName);
         init();
     }
 
@@ -55,18 +45,16 @@ public class BasicJPanel extends JPanel {
         this.setDoubleBuffered(true);
         this.setVisible(true);
     }
-
+/*
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (this.backGround != null) {
             this.backGround.paintIcon(this, g, 0, 0);
         }
-        g.drawImage(this.originalImage, Constants.IMAGE_X, Constants.IMAGE_Y, this);
-        g.drawImage(this.images.getImageForEditing(),
-                Constants.WINDOW_W - this.originalImage.getWidth() -Constants.IMAGE_X,
-                Constants.IMAGE_Y, this);
     }
+
+ */
 
 
 
@@ -86,22 +74,24 @@ public class BasicJPanel extends JPanel {
             String inputFromUser = textField.getText();
             textField.setText("");
 
-
+/*
             int currentY = Constants.FIRST_BUTTON_Y;
             for (int i = 0; i < Constants.AMOUNT_OF_BUTTONS; i++) {
                 addButton(i, Constants.filterOptions[i], Constants.TEXT_FIELD_X, currentY,
                         Constants.TEXT_FIELD_W, Constants.TEXT_FIELD_H, Color.white, Color.black);
                 currentY += Constants.TEXT_FIELD_H;
             }
-            Facebook facebook = new Facebook(0, 0, Constants.WINDOW_W, Constants.WINDOW_H,
-                    Color.GRAY, inputFromUser);
 
+ */
+            Facebook facebook = new Facebook(0,0, Constants.WINDOW_W, Constants.WINDOW_H,
+                    Color.GRAY, inputFromUser, pic1);
+            this.add(facebook);
 
         });
         this.add(textField);
         return textField;
     }
-
+/*
     public JButton addButton(int type, String text, int x, int y, int w, int h, Color foregroundColor,
                              Color color) {
         JButton button = new JButton(text);
@@ -116,5 +106,7 @@ public class BasicJPanel extends JPanel {
         repaint();
         return button;
     }
+
+ */
 
 }

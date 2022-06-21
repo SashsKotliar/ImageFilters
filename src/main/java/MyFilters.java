@@ -3,12 +3,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import javax.swing.*;
 
 
 public class MyFilters {
     private BufferedImage imageForEditing;
-
+    private Facebook facebook;
     public static final int SEPIA_DEPTH = 20;
     public static final int SEPIA_INTENSITY = 30;
     public static final int NEGATIVE_FILTER = 0;
@@ -19,14 +20,13 @@ public class MyFilters {
     public static final int COLOR_SHIFT_RIGHT = 5;
 
 
-    public MyFilters(){
-
+    public MyFilters(URL url){
         try {
-            File file = new File("C:\\Users\\Sasha\\Downloads\\DoraPhoto.jpg");
-            this.imageForEditing = ImageIO.read(file);
+            this.imageForEditing = ImageIO.read(url);
         } catch (IOException e){
-            System.out.println("Invalid data");
+            e.printStackTrace();
         }
+
     }
 
     public void setToNegative(BufferedImage originalImage){
